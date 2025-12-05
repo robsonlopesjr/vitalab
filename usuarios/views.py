@@ -54,18 +54,20 @@ def cadastro(request):
 
 def logar(request):
     if request.method == "GET":
-        return render(request, 'logar.html')
+        return render(request, "logar.html")
 
     elif request.method == "POST":
-        username = request.POST.get('username')
-        senha = request.POST.get('senha')
+        username = request.POST.get("username")
+        senha = request.POST.get("senha")
 
         user = authenticate(username=username, password=senha)
 
         if user:
             login(request, user)
 
-            return redirect('/')
+            return redirect("/")
         else:
-            messages.add_message(request, messages.constants.ERROR, 'Usuario ou senha inválidos')
-            return redirect('/usuarios/login')
+            messages.add_message(
+                request, messages.constants.ERROR, "Usuario ou senha inválidos"
+            )
+            return redirect("/usuarios/login")
