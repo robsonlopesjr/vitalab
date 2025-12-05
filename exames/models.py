@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 class TiposExames(models.Model):
     tipo_choices = (
-        ('I', 'Exame de imagem'),
-        ('S', 'Exame de sangue'),
+        ("I", "Exame de imagem"),
+        ("S", "Exame de sangue"),
     )
 
     nome = models.CharField(max_length=100, unique=True)
@@ -18,11 +18,9 @@ class TiposExames(models.Model):
     def __str__(self):
         return self.nome
 
+
 class SolicitacaoExame(models.Model):
-    choice_status = (
-        ('E', 'Em análise'),
-        ('F', 'Finalizado')
-    )
+    choice_status = (("E", "Em análise"), ("F", "Finalizado"))
     usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     exame = models.ForeignKey(TiposExames, on_delete=models.DO_NOTHING)
     status = models.CharField(max_length=2, choices=choice_status)
@@ -31,7 +29,7 @@ class SolicitacaoExame(models.Model):
     senha = models.CharField(max_length=6, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.usuario} | {self.exame.nome}'
+        return f"{self.usuario} | {self.exame.nome}"
 
 
 class PedidosExames(models.Model):
@@ -41,4 +39,4 @@ class PedidosExames(models.Model):
     data = models.DateField()
 
     def __str__(self):
-        return f'{self.usuario} | {self.data}'
+        return f"{self.usuario} | {self.data}"
